@@ -1,4 +1,4 @@
-package com.example.rzeposlaw.myapplication;
+package com.example.rzeposlaw.localizeme;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

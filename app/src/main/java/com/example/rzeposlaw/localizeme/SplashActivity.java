@@ -1,4 +1,4 @@
-package com.example.rzeposlaw.myapplication;
+package com.example.rzeposlaw.localizeme;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
