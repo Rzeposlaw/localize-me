@@ -2,4 +2,8 @@
     <string name="app_name">Localize Me My Friend</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
 </resources>

@@ -17,7 +17,7 @@
             android:textColorHint="@color/strokeButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username" />
+            android:hint="@string/username" />
 
         <EditText
             android:background="@drawable/rounded_background_top"
@@ -26,7 +26,7 @@
             android:textColorHint="@color/strokeButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password" />
+            android:hint="@string/password" />
 
     </LinearLayout>
 

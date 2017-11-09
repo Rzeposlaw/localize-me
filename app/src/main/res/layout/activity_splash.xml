@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/background_gradient"/>
 
-        <com.example.rzeposlaw.localizeme.RozhaOneTextView
+        <com.example.rzeposlaw.localizeme.view.RozhaOneTextView
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_marginRight="30dp"

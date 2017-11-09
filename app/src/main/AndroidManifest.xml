@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name="com.example.rzeposlaw.localizeme.SplashActivity"
+        <activity android:name="com.example.rzeposlaw.localizeme.activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.rzeposlaw.localizeme.LoginRegisterActivity"/>
+        <activity android:name="com.example.rzeposlaw.localizeme.activity.LoginRegisterActivity"/>
     </application>
 
 </manifest>

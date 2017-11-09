@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:hint="Username" />
+            android:hint="@string/username" />
 
         <EditText
             android:padding="30dp"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_background_center"
             android:layout_marginBottom="10dp"
-            android:hint="Email" />
+            android:hint="@string/email" />
 
         <EditText
             android:padding="30dp"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_background_center"
             android:layout_marginBottom="10dp"
-            android:hint="Password" />
+            android:hint="@string/password" />
 
         <EditText
             android:padding="30dp"
@@ -44,7 +44,7 @@
             android:textColorHint="@color/strokeButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Repeat password" />
+            android:hint="@string/repeat_password" />
 
     </LinearLayout>
 
