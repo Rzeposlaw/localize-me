@@ -1,5 +1,6 @@
 package com.example.rzeposlaw.localizeme;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,5 +22,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
+
 }

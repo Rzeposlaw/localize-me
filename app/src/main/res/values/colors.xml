@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#002c7ccc</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="strokeButton">#fd5a03</color>
-    <color name="solidButton">#0066CC</color>
-    <color name="buttonTextColor">#FFFF66</color>
+    <color name="strokeButton">#bf0c4fae</color>
+    <color name="solidButton">#097aec</color>
+    <color name="buttonTextColor">#ffffff</color>
 </resources>

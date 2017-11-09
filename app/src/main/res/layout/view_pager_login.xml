@@ -12,14 +12,17 @@
         android:orientation="vertical">
 
         <EditText
-            android:layout_margin="30dp"
+            android:background="@drawable/rounded_background_bottom"
+            android:padding="30dp"
             android:textColorHint="@color/strokeButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username" />
 
         <EditText
-            android:layout_margin="30dp"
+            android:background="@drawable/rounded_background_top"
+            android:layout_marginTop="10dp"
+            android:padding="30dp"
             android:textColorHint="@color/strokeButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

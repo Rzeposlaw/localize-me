@@ -5,66 +5,47 @@
     android:id="@+id/splash"
     android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:elevation="10dp"
-        android:background="#b9ffcc11"/>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
-            android:layout_width="500dp"
-            android:layout_height="250dp"
-            android:layout_gravity="bottom|center"
-            android:src="@drawable/mart_map"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/splash_map"/>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/orange_gradient"/>
+            android:src="@drawable/background_gradient"/>
+
+        <com.example.rzeposlaw.localizeme.RozhaOneTextView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="37sp"
+            android:textAlignment="center"
+            android:padding="20dp"
+            android:textColor="@android:color/black"
+            android:background="@drawable/rounded_background_top"
+            android:text="@string/app_name"/>
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="70dp"
-            android:src="@drawable/route"/>
-
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="80dp"
-            android:src="@drawable/marker"/>
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="150dp"
-            android:src="@drawable/marker"/>
-
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="110dp"
-            android:src="@drawable/marker"/>
+            android:layout_width="match_parent"
+            android:layout_height="275dp"
+            android:src="@drawable/route"
+            android:translationY="4dp"
+            android:layout_gravity="bottom"/>
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_gravity="bottom|right"
-            android:layout_marginRight="75dp"
-            android:layout_marginBottom="38dp"
-            android:src="@drawable/navi_icon" />
-
+            android:layout_width="190dp"
+            android:layout_height="190dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="210dp"
+            android:src="@drawable/marker" />
 
     </FrameLayout>
 

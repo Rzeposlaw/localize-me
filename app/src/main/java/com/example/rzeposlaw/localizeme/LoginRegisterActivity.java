@@ -48,9 +48,11 @@ public class LoginRegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 viewPager.setCurrentItem(0);
                 loginButton.setBackgroundDrawable(getResources()
-                        .getDrawable(R.drawable.buttonshapeleftorange));
+                        .getDrawable(R.drawable.buttonshapeleftblue));
                 registerButton.setBackgroundDrawable(getResources()
                         .getDrawable(R.drawable.buttonshaperight));
+                loginButton.setTextColor(getResources().getColor(R.color.buttonTextColor));
+                registerButton.setTextColor(getResources().getColor(R.color.strokeButton));
             }
         });
 
@@ -61,7 +63,9 @@ public class LoginRegisterActivity extends AppCompatActivity {
                 loginButton.setBackgroundDrawable(getResources()
                         .getDrawable(R.drawable.buttonshapeleft));
                 registerButton.setBackgroundDrawable(getResources()
-                        .getDrawable(R.drawable.buttonshaperightorange));
+                        .getDrawable(R.drawable.buttonshaperightblue));
+                registerButton.setTextColor(getResources().getColor(R.color.buttonTextColor));
+                loginButton.setTextColor(getResources().getColor(R.color.strokeButton));
             }
         });
     }
