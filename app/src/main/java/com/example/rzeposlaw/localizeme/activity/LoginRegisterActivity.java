@@ -8,11 +8,12 @@ import android.widget.Button;
 
 import com.example.rzeposlaw.localizeme.adapter.LoginRegisterPagerAdapter;
 import com.example.rzeposlaw.localizeme.R;
+import com.example.rzeposlaw.localizeme.view.RozhaOneTextView;
 
 public class LoginRegisterActivity extends AppCompatActivity {
 
-    private Button loginButton;
-    private Button registerButton;
+    private RozhaOneTextView loginButton;
+    private RozhaOneTextView registerButton;
     private ViewPager viewPager;
 
     @Override
@@ -43,8 +44,8 @@ public class LoginRegisterActivity extends AppCompatActivity {
             }
         });
 
-        loginButton = (Button) findViewById(R.id.login);
-        registerButton = (Button) findViewById(R.id.register);
+        loginButton = (RozhaOneTextView) findViewById(R.id.login);
+        registerButton = (RozhaOneTextView) findViewById(R.id.register);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">@android:color/transparent</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="strokeButton">#bf0c4fae</color>
+    <color name="strokeButton">#bf032554</color>
     <color name="solidButton">#097aec</color>
     <color name="buttonTextColor">#ffffff</color>
 </resources>
