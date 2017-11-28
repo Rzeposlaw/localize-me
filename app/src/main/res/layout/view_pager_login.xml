@@ -17,7 +17,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/input_username"
+                android:id="@+id/input_username_login"
                 android:background="@drawable/rounded_background_bottom"
                 android:padding="30dp"
                 android:textColorHint="@color/strokeButton"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/input_password"
+                android:id="@+id/input_password_login"
                 android:background="@drawable/rounded_background_top"
                 android:layout_marginTop="10dp"
                 android:padding="30dp"

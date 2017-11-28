@@ -1,9 +1,11 @@
 package com.example.rzeposlaw.localizeme.activity;
 
+import android.graphics.Typeface;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import com.example.rzeposlaw.localizeme.adapter.LoginRegisterPagerAdapter;
 import com.example.rzeposlaw.localizeme.R;
@@ -14,11 +16,16 @@ public class LoginRegisterActivity extends AppCompatActivity {
     private RozhaOneTextView loginButton;
     private RozhaOneTextView registerButton;
     private ViewPager viewPager;
+    private EditText usernameLogin;
+    private EditText passwordLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
+
+        usernameLogin = (EditText) findViewById(R.id.input_username_login);
+        passwordLogin = (EditText) findViewById(R.id.input_password_login);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(new LoginRegisterPagerAdapter(this));
@@ -71,5 +78,9 @@ public class LoginRegisterActivity extends AppCompatActivity {
                 loginButton.setTextColor(getResources().getColor(R.color.strokeButton));
             }
         });
+
+        Typeface tf = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/RozhaOne-Regular.ttf");
+        usernameLogin.setTypeface(tf);
+        passwordLogin.setTypeface(tf);
     }
 }
