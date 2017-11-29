@@ -18,6 +18,12 @@ public class LoginRegisterActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private EditText usernameLogin;
     private EditText passwordLogin;
+    private EditText usernameRegister;
+    private EditText emailRegister;
+    private EditText passwordRegister;
+    private EditText repeatPasswordRegister;
+    private boolean loginClicked = true;
+    private boolean registerClicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,10 @@ public class LoginRegisterActivity extends AppCompatActivity {
 
         usernameLogin = (EditText) findViewById(R.id.input_username_login);
         passwordLogin = (EditText) findViewById(R.id.input_password_login);
+        usernameRegister = (EditText) findViewById(R.id.input_username_register);
+        emailRegister = (EditText) findViewById(R.id.input_email_register);
+        passwordRegister = (EditText) findViewById(R.id.input_password_register);
+        repeatPasswordRegister = (EditText) findViewById(R.id.input_repeat_password_register);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(new LoginRegisterPagerAdapter(this));
@@ -56,6 +66,12 @@ public class LoginRegisterActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(loginClicked){
+                    //TODO check inputted data if he can login
+                }
+                else{
+                    loginClicked = true;
+                }
                 viewPager.setCurrentItem(0);
                 loginButton.setBackgroundDrawable(getResources()
                         .getDrawable(R.drawable.buttonshapeleftblue));
@@ -69,6 +85,12 @@ public class LoginRegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(registerClicked){
+                    //TODO check inputted data if he can register
+                }
+                else{
+                    registerClicked = true;
+                }
                 viewPager.setCurrentItem(1);
                 loginButton.setBackgroundDrawable(getResources()
                         .getDrawable(R.drawable.buttonshapeleft));
@@ -82,5 +104,15 @@ public class LoginRegisterActivity extends AppCompatActivity {
         Typeface tf = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/RozhaOne-Regular.ttf");
         usernameLogin.setTypeface(tf);
         passwordLogin.setTypeface(tf);
+    }
+
+    private boolean validateLoginInputs(){
+        //TODO
+        return false;
+    }
+
+    private boolean validateRegisterInputs(){
+        //TODO
+        return false;
     }
 }
