@@ -21,8 +21,8 @@
                 android:id="@+id/input_username_register"
                 android:background="@drawable/rounded_background_bottom"
                 android:layout_marginTop="10dp"
-                android:padding="30dp"
-                android:textColorHint="@color/strokeButton"
+                android:padding="20dp"
+                android:textColorHint="@color/colorPrimaryDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/username" />
@@ -37,9 +37,9 @@
             <EditText
                 android:id="@+id/input_email_register"
                 android:background="@drawable/rounded_background_center"
-                android:padding="30dp"
+                android:padding="20dp"
                 android:inputType="textEmailAddress"
-                android:textColorHint="@color/strokeButton"
+                android:textColorHint="@color/colorPrimaryDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email" />
@@ -54,9 +54,9 @@
             <EditText
                 android:id="@+id/input_password_register"
                 android:background="@drawable/rounded_background_center"
-                android:padding="30dp"
+                android:padding="20dp"
                 android:inputType="textPassword"
-                android:textColorHint="@color/strokeButton"
+                android:textColorHint="@color/colorPrimaryDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password" />
@@ -70,9 +70,9 @@
             <EditText
                 android:id="@+id/input_repeat_password_register"
                 android:background="@drawable/rounded_background_top"
-                android:padding="30dp"
+                android:padding="20dp"
                 android:inputType="textPassword"
-                android:textColorHint="@color/strokeButton"
+                android:textColorHint="@color/colorPrimaryDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/repeat_password" />

@@ -2,8 +2,8 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@android:color/black</item>
-        <item name="colorPrimaryDark">@color/strokeButton</item>
-        <item name="colorAccent">@color/buttonTextColor</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

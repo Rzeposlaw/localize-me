@@ -16,12 +16,12 @@ public class LoginRegisterActivity extends AppCompatActivity {
     private RozhaOneTextView loginButton;
     private RozhaOneTextView registerButton;
     private ViewPager viewPager;
-    private EditText usernameLogin;
-    private EditText passwordLogin;
-    private EditText usernameRegister;
-    private EditText emailRegister;
-    private EditText passwordRegister;
-    private EditText repeatPasswordRegister;
+//    private EditText usernameLogin;
+//    private EditText passwordLogin;
+//    private EditText usernameRegister;
+//    private EditText emailRegister;
+//    private EditText passwordRegister;
+//    private EditText repeatPasswordRegister;
     private boolean loginClicked = true;
     private boolean registerClicked = false;
 
@@ -30,12 +30,12 @@ public class LoginRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
 
-        usernameLogin = (EditText) findViewById(R.id.input_username_login);
-        passwordLogin = (EditText) findViewById(R.id.input_password_login);
-        usernameRegister = (EditText) findViewById(R.id.input_username_register);
-        emailRegister = (EditText) findViewById(R.id.input_email_register);
-        passwordRegister = (EditText) findViewById(R.id.input_password_register);
-        repeatPasswordRegister = (EditText) findViewById(R.id.input_repeat_password_register);
+//        usernameLogin = (EditText) findViewById(R.id.input_username_login);
+//        passwordLogin = (EditText) findViewById(R.id.input_password_login);
+//        usernameRegister = (EditText) findViewById(R.id.input_username_register);
+//        emailRegister = (EditText) findViewById(R.id.input_email_register);
+//        passwordRegister = (EditText) findViewById(R.id.input_password_register);
+//        repeatPasswordRegister = (EditText) findViewById(R.id.input_repeat_password_register);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(new LoginRegisterPagerAdapter(this));
@@ -77,8 +77,8 @@ public class LoginRegisterActivity extends AppCompatActivity {
                         .getDrawable(R.drawable.buttonshapeleftblue));
                 registerButton.setBackgroundDrawable(getResources()
                         .getDrawable(R.drawable.buttonshaperight));
-                loginButton.setTextColor(getResources().getColor(R.color.buttonTextColor));
-                registerButton.setTextColor(getResources().getColor(R.color.strokeButton));
+                loginButton.setTextColor(getResources().getColor(R.color.colorAccent));
+                registerButton.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             }
         });
 
@@ -96,14 +96,14 @@ public class LoginRegisterActivity extends AppCompatActivity {
                         .getDrawable(R.drawable.buttonshapeleft));
                 registerButton.setBackgroundDrawable(getResources()
                         .getDrawable(R.drawable.buttonshaperightblue));
-                registerButton.setTextColor(getResources().getColor(R.color.buttonTextColor));
-                loginButton.setTextColor(getResources().getColor(R.color.strokeButton));
+                registerButton.setTextColor(getResources().getColor(R.color.colorAccent));
+                loginButton.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             }
         });
 
         Typeface tf = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/RozhaOne-Regular.ttf");
-        usernameLogin.setTypeface(tf);
-        passwordLogin.setTypeface(tf);
+//        usernameLogin.setTypeface(tf);
+//        passwordLogin.setTypeface(tf);
     }
 
     private boolean validateLoginInputs(){

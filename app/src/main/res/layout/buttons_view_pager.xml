@@ -30,7 +30,7 @@
         android:background="@drawable/buttonshaperight"
         android:text="@string/register"
         android:textAllCaps="false"
-        android:textColor="@color/strokeButton"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp" />
 
 </LinearLayout>
