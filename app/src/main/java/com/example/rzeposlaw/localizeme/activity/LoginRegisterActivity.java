@@ -4,8 +4,14 @@ import android.graphics.Typeface;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.rzeposlaw.localizeme.adapter.LoginRegisterPagerAdapter;
 import com.example.rzeposlaw.localizeme.R;
@@ -13,29 +19,33 @@ import com.example.rzeposlaw.localizeme.view.RozhaOneTextView;
 
 public class LoginRegisterActivity extends AppCompatActivity {
 
+    private static final String TAG = LoginRegisterActivity.class.getName();
     private RozhaOneTextView loginButton;
     private RozhaOneTextView registerButton;
     private ViewPager viewPager;
-//    private EditText usernameLogin;
-//    private EditText passwordLogin;
-//    private EditText usernameRegister;
-//    private EditText emailRegister;
-//    private EditText passwordRegister;
-//    private EditText repeatPasswordRegister;
-    private boolean loginClicked = true;
-    private boolean registerClicked = false;
+    private EditText usernameLogin;
+    private EditText passwordLogin;
+    private EditText usernameRegister;
+    private EditText emailRegister;
+    private EditText passwordRegister;
+    private EditText repeatPasswordRegister;
+    private boolean loginClicked;
+    private boolean registerClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
 
-//        usernameLogin = (EditText) findViewById(R.id.input_username_login);
-//        passwordLogin = (EditText) findViewById(R.id.input_password_login);
-//        usernameRegister = (EditText) findViewById(R.id.input_username_register);
-//        emailRegister = (EditText) findViewById(R.id.input_email_register);
-//        passwordRegister = (EditText) findViewById(R.id.input_password_register);
-//        repeatPasswordRegister = (EditText) findViewById(R.id.input_repeat_password_register);
+        loginClicked = true;
+        registerClicked = false;
+
+        usernameLogin = (EditText) findViewById(R.id.input_username_login);
+        passwordLogin = (EditText) findViewById(R.id.input_password_login);
+        usernameRegister = (EditText) findViewById(R.id.input_username_register);
+        emailRegister = (EditText) findViewById(R.id.input_email_register);
+        passwordRegister = (EditText) findViewById(R.id.input_password_register);
+        repeatPasswordRegister = (EditText) findViewById(R.id.input_repeat_password_register);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(new LoginRegisterPagerAdapter(this));
@@ -66,53 +76,65 @@ public class LoginRegisterActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(loginClicked){
-                    //TODO check inputted data if he can login
-                }
-                else{
+                if(!loginClicked) {
+                    viewPager.setCurrentItem(0);
+                    loginButton.setBackgroundDrawable(getResources()
+                            .getDrawable(R.drawable.buttonshapeleftblue));
+                    registerButton.setBackgroundDrawable(getResources()
+                            .getDrawable(R.drawable.buttonshaperight));
+                    loginButton.setTextColor(getResources().getColor(R.color.colorAccent));
+                    registerButton.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                     loginClicked = true;
+                    registerClicked = false;
                 }
-                viewPager.setCurrentItem(0);
-                loginButton.setBackgroundDrawable(getResources()
-                        .getDrawable(R.drawable.buttonshapeleftblue));
-                registerButton.setBackgroundDrawable(getResources()
-                        .getDrawable(R.drawable.buttonshaperight));
-                loginButton.setTextColor(getResources().getColor(R.color.colorAccent));
-                registerButton.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                else {
+                    validateLoginInputs();
+                }
             }
         });
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(registerClicked){
-                    //TODO check inputted data if he can register
-                }
-                else{
+                if(!registerClicked) {
+                    viewPager.setCurrentItem(1);
+                    loginButton.setBackgroundDrawable(getResources()
+                            .getDrawable(R.drawable.buttonshapeleft));
+                    registerButton.setBackgroundDrawable(getResources()
+                            .getDrawable(R.drawable.buttonshaperightblue));
+                    registerButton.setTextColor(getResources().getColor(R.color.colorAccent));
+                    loginButton.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                     registerClicked = true;
+                    loginClicked = false;
+                }else{
+                    validateRegisterInputs();
                 }
-                viewPager.setCurrentItem(1);
-                loginButton.setBackgroundDrawable(getResources()
-                        .getDrawable(R.drawable.buttonshapeleft));
-                registerButton.setBackgroundDrawable(getResources()
-                        .getDrawable(R.drawable.buttonshaperightblue));
-                registerButton.setTextColor(getResources().getColor(R.color.colorAccent));
-                loginButton.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             }
         });
+    }
 
-        Typeface tf = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/RozhaOne-Regular.ttf");
-//        usernameLogin.setTypeface(tf);
-//        passwordLogin.setTypeface(tf);
+    private void showToast(){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        RozhaOneTextView text = (RozhaOneTextView) layout.findViewById(R.id.toast_text);
+        text.setText(getResources().getString(R.string.empty_imputs));
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.TOP, 0, 0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 
     private boolean validateLoginInputs(){
-        //TODO
+        showToast();
         return false;
     }
 
     private boolean validateRegisterInputs(){
-        //TODO
+        showToast();
         return false;
     }
 }
