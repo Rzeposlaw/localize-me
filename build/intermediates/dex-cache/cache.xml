@@ -3,33 +3,6 @@
 
     <item
         is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/04c2db83d6f1cbe35de50e40f6daab9886f8fa75/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="b4d6fbbb48b42dd03fd9c5a09b3b7a53266df6ed">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c2a3f65d3eb0efe6dceae597b7dc597dcb29fbb0/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/fde07c2cfbb7134a334ded120b1d7b7bf9b23d63/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="a37fc31c5ceeaa4532a37358add1b189d8db4af1">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f755fdb6786a89485f1b21e3179fefacb08180bf/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/844fdda97d585db4435320979bf1377ff23edf13/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="2442771a5590dd4eb4bce00c2e9dca9e22e4c963">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7213df95aff70583d619a9b4faebb6dbec9dccf1/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
@@ -39,147 +12,57 @@
     </item>
     <item
         is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/6485577951e3f14950bf98d05020cadcb62d0c13/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="233f60a165ae622c8b36731502ebbda0f65e1930">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6ff0b550036602d180123dc3e74a0e21f5255692/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/296e87458acab8386f5110886ac28d649e278c9f/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="b62fdc4cfef174c1e456014195c83fa7de7dc041">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_69928bc73d7c8685a672bc33288c52d34ca8112f/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/rzeposlaw/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.0.0/e414a4cb28434e25c4f6aa71426eb20cf4874ae9/common-1.0.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="e414a4cb28434e25c4f6aa71426eb20cf4874ae9">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/common-1.0.0_919fde8d594cd297f38bd6ff85d5c116e50cdac1/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/f09599e00d242b657ca2d74f9beb48c12d60cfab/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="b12cd9c87c3dfb012a911b6e38d2444ed0a65e1f">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_cee5c5dbfba21249a48c980034b9f98e42042da1/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/d4602f26b4f517a349b18bc6e37c3a45931d3a18/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="40392f30a601db5675cdf18192aab013d6fee6ec">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e4d8690dd0f588dbad0f2b91a9d81e1940effa14/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/d65bffdde3c670d070c01c223fea2d070f89c827/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="6f4138a4e065826cb044d49faea4cfd7191773d1">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4d3dfbf2e8f2d322eef1187eba12113052e001c4/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/69886f0fc95619e70841d6f077b983998780b3d4/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="f97cf85b0fe70d37a705111dafa6b1b418ea1650">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_654ea63aaba13d7296f2693afa143fcc20aa9a16/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/37ddef33c00c4a762314ef18e4321f250ea6b4ad/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="58b12bdb21a84f22e0dc3b047aeceb0a546b1b44">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6098a338b0ec3a7c1af1f0fe5e5d4a276ed0cb9d/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/rzeposlaw/.gradle/caches/modules-2/files-2.1/android.arch.core/common/1.0.0/a2d487452376193fc8c103dd2b9bd5f2b1b44563/common-1.0.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="a2d487452376193fc8c103dd2b9bd5f2b1b44563">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/common-1.0.0_1649217ad6bf6be5db9c1590d41c98a6385b6b25/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/5042791868d0245a7f782d47c2b0468f17f88373/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="508f50705b4fde51a16259f29c854201a3044516">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4802e106a79b4567b753c5a3805b9a8ce5916bdf/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/78629441917826e2ce9900327151659ef0a5df69/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d9dbc8ad14ae0b7c4995d68ec8437e97dbde341c/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
-        sha1="3dc04c5862442077af7f6fbfd55ed27ee7401552">
+        sha1="5425d45436797794e29b8dba615eea09a0de5727">
         <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_2c39d50544932e1a7d57f5f1aaac47ec74926d0a/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/af6d665668297959d665e819576771edb3ba93c9/output/jars/classes.jar"
+        jar="/home/rzeposlaw/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.1/2a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0/gson-2.8.1.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
-        sha1="7efef32744ca4a436492d5cf28c08698cc2af256">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_cc9bbd5423d876b6ca092420c2ff45f29a253123/classes.dex" />
+        sha1="02a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0">
+        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.8.1_338b3dbd9e895badfe334648cc98e833e26ac7e1/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/rzeposlaw/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/26.1.0/814258103cf26a15fcc26ecce35f5b7d24b73f8/support-annotations-26.1.0.jar"
+        jar="/home/rzeposlaw/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
-        sha1="0814258103cf26a15fcc26ecce35f5b7d24b73f8">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-26.1.0_67ea6df640cbaa6ce532dda3543def14c1b04dda/classes.dex" />
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.13.0_23c207e4f85c49ed01261dcf21a81fe91639c515/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/e60eec9380b5e6215943a2d9adf36ef64e63abb1/output/jars/classes.jar"
+        jar="/home/rzeposlaw/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.3.0/bcacde6a8ccedcc56c127403d26b76072fe6214d/retrofit-2.3.0.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
-        sha1="f428e2fbc9ed0b297e3a3f420e51e6982f66822d">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_bb3c08b55fe23c692668d51ec6026481eac2afdd/classes.dex" />
+        sha1="bcacde6a8ccedcc56c127403d26b76072fe6214d">
+        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/retrofit-2.3.0_a142f5028b5fb37165e4739c643f4ef60fc244ab/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/rzeposlaw/.android/build-cache/a83cd24cf2ef28d618763b239a1ba5a299f4020b/output/jars/classes.jar"
+        jar="/home/rzeposlaw/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.8.0/5a11f020cce2d11eb71ba916700600e18c4547e7/okhttp-3.8.0.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
-        sha1="ee07783aa59eefdeacc107abf472f45f60272302">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_51b2ad957a9928d1159c2d8484b50b0c7a1a8488/classes.dex" />
+        sha1="5a11f020cce2d11eb71ba916700600e18c4547e7">
+        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.8.0_a7bb5fddcf624bf658157931829c97285d9d5bcc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/rzeposlaw/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.3.0/9e09011e9767bb76b5e27c9b8223476b93b14631/converter-gson-2.3.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="9e09011e9767bb76b5e27c9b8223476b93b14631">
+        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/converter-gson-2.3.0_9d0a736f23d4aca12f958252b442a5dc57284441/classes.dex" />
     </item>
 
 </items>

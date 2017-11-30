@@ -8,4 +8,6 @@
     <string name="email">Email</string>
     <string name="title_activity_map">Map</string>
     <string name="empty_imputs">Proszę wypełnić wszystkie pola</string>
+    <string name="invalid_passwords">Hasła są różne!</string>
+    <string name="wrong_input_data">Podano niepoprawne dane</string>
 </resources>

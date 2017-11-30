@@ -1,10 +1,9 @@
 package com.example.rzeposlaw.localizeme.activity;
 
-import android.graphics.Typeface;
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,11 +14,21 @@ import android.widget.Toast;
 
 import com.example.rzeposlaw.localizeme.adapter.LoginRegisterPagerAdapter;
 import com.example.rzeposlaw.localizeme.R;
+import com.example.rzeposlaw.localizeme.data.ApiClient;
+import com.example.rzeposlaw.localizeme.data.LocationAPI;
+import com.example.rzeposlaw.localizeme.data.User;
 import com.example.rzeposlaw.localizeme.view.RozhaOneTextView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginRegisterActivity extends AppCompatActivity {
 
     private static final String TAG = LoginRegisterActivity.class.getName();
+    private LocationAPI apiService =
+            ApiClient.getClient().create(LocationAPI.class);
+
     private RozhaOneTextView loginButton;
     private RozhaOneTextView registerButton;
     private ViewPager viewPager;
@@ -58,7 +67,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if(position == 0)
+                if (position == 0)
                     loginButton.performClick();
                 else
                     registerButton.performClick();
@@ -76,7 +85,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!loginClicked) {
+                if (!loginClicked) {
                     viewPager.setCurrentItem(0);
                     loginButton.setBackgroundDrawable(getResources()
                             .getDrawable(R.drawable.buttonshapeleftblue));
@@ -86,8 +95,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
                     registerButton.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                     loginClicked = true;
                     registerClicked = false;
-                }
-                else {
+                } else {
                     validateLoginInputs();
                 }
             }
@@ -96,7 +104,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!registerClicked) {
+                if (!registerClicked) {
                     viewPager.setCurrentItem(1);
                     loginButton.setBackgroundDrawable(getResources()
                             .getDrawable(R.drawable.buttonshapeleft));
@@ -106,20 +114,20 @@ public class LoginRegisterActivity extends AppCompatActivity {
                     loginButton.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                     registerClicked = true;
                     loginClicked = false;
-                }else{
+                } else {
                     validateRegisterInputs();
                 }
             }
         });
     }
 
-    private void showToast(){
+    private void showToast(String textToast) {
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_layout,
                 (ViewGroup) findViewById(R.id.toast_layout_root));
 
         RozhaOneTextView text = (RozhaOneTextView) layout.findViewById(R.id.toast_text);
-        text.setText(getResources().getString(R.string.empty_imputs));
+        text.setText(textToast);
 
         Toast toast = new Toast(getApplicationContext());
         toast.setGravity(Gravity.TOP, 0, 0);
@@ -128,13 +136,58 @@ public class LoginRegisterActivity extends AppCompatActivity {
         toast.show();
     }
 
-    private boolean validateLoginInputs(){
-        showToast();
-        return false;
+    private void startListActivity(){
+        Intent intent = new Intent(this, FriendListActivity.class);
+        startActivity(intent);
     }
 
-    private boolean validateRegisterInputs(){
-        showToast();
-        return false;
+    private void validateLoginInputs() {
+//        if (usernameLogin.getText().toString().equals("") || passwordLogin.getText().toString().equals("")) {
+//            showToast(getResources().getString(R.string.empty_imputs));
+//        }else{
+        Log.d(TAG, usernameLogin.getText().toString());
+            Call<User> call = apiService.login
+                    (new User(usernameLogin.getText().toString(), passwordLogin.getText().toString()));
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    if (response.code() == 200){
+                        startListActivity();
+                    }else{
+                        showToast(getResources().getString(R.string.wrong_input_data));
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+
+                }
+            });
+//        }
+    }
+
+    private void validateRegisterInputs() {
+//        if (usernameRegister.getText().toString().isEmpty() || passwordRegister.getText().toString().isEmpty()
+//                || repeatPasswordRegister.getText().toString().isEmpty()
+//                || emailRegister.getText().toString().isEmpty()) {
+//            if(!passwordRegister.getText().toString().equals(repeatPasswordRegister.getText().toString())){
+//                showToast(getResources().getString(R.string.invalid_passwords));
+//            }else
+//                showToast(getResources().getString(R.string.empty_imputs));
+//        } else{
+            Call<User> call = apiService.register
+                    (new User(usernameRegister.getText().toString(), passwordRegister.getText().toString()));
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+
+                }
+            });
+//        }
     }
 }

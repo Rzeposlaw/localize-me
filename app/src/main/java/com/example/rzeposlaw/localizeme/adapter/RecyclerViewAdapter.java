@@ -9,24 +9,22 @@ import android.widget.TextView;
 import com.example.rzeposlaw.localizeme.R;
 import com.example.rzeposlaw.localizeme.view.RozhaOneTextView;
 
+import java.util.List;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private String[] mDatasetUsernames;
-    private String[] mDatasetEmails;
+    private List<String> mDatasetUsernames;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public RozhaOneTextView username;
-        public RozhaOneTextView email;
         public ViewHolder(View view) {
             super(view);
             username = (RozhaOneTextView) view.findViewById(R.id.username);
-            email = (RozhaOneTextView) view.findViewById(R.id.email);
         }
     }
 
-    public RecyclerViewAdapter(String[] mDatasetUsernames, String[] mDatasetEmails) {
+    public RecyclerViewAdapter(List<String> mDatasetUsernames) {
         this.mDatasetUsernames = mDatasetUsernames;
-        this.mDatasetEmails = mDatasetEmails;
     }
 
     @Override
@@ -39,13 +37,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.username.setText(mDatasetUsernames[position]);
-        holder.email.setText(mDatasetEmails[position]);
+        holder.username.setText(mDatasetUsernames.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mDatasetUsernames.length;
+        return mDatasetUsernames.size();
     }
 }
 
