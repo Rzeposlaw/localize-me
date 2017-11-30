@@ -5,28 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="100dp">
 
-    <Button
+    <com.example.rzeposlaw.localizeme.view.RozhaOneTextView
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/view_pager_margin"
         android:layout_marginEnd="@dimen/view_pager_margin"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:background="@drawable/buttonshapeleftblue"
         android:text="@string/login"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 
-    <Button
+    <com.example.rzeposlaw.localizeme.view.RozhaOneTextView
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/view_pager_margin"
         android:layout_marginStart="@dimen/view_pager_margin"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:background="@drawable/buttonshaperight"
         android:text="@string/register"
         android:textAllCaps="false"
-        android:textColor="@color/strokeButton"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp" />
 
 </LinearLayout>

@@ -6,4 +6,5 @@
     <string name="repeat_password">Repeat password</string>
     <string name="username">Username</string>
     <string name="email">Email</string>
+    <string name="title_activity_map">Map</string>
 </resources>
