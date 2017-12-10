@@ -10,7 +10,6 @@ import com.example.rzeposlaw.localizeme.adapter.RecyclerViewAdapter;
 import com.example.rzeposlaw.localizeme.data.ApiClient;
 import com.example.rzeposlaw.localizeme.data.Credentials;
 import com.example.rzeposlaw.localizeme.data.LocationAPI;
-import com.example.rzeposlaw.localizeme.data.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,6 @@ public class FriendListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_list);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(this);
@@ -49,8 +47,8 @@ public class FriendListActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Credentials>> call, Throwable t) {
-
             }
+
         });
 
         List<String> names = new ArrayList<>();
