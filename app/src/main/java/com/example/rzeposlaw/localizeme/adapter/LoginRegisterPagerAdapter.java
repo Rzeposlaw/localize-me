@@ -31,6 +31,10 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
 
     private RozhaOneEditText usernameLogin;
     private RozhaOneEditText passwordLogin;
+    private RozhaOneEditText usernameRegister;
+    private RozhaOneEditText emailRegister;
+    private RozhaOneEditText passwordRegister;
+    private RozhaOneEditText repeatPasswordRegister;
 
     public LoginRegisterPagerAdapter(Context context) {
         mContext = context;
@@ -43,12 +47,14 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
         collection.addView(layout);
         toastView = inflater.inflate(R.layout.toast_layout,
                 (ViewGroup) layout.findViewById(R.id.toast_layout_root));
-        if(position == 0){
+        if (position == 0) {
             usernameLogin = (RozhaOneEditText) layout.findViewById(R.id.input_username_login);
             passwordLogin = (RozhaOneEditText) layout.findViewById(R.id.input_password_login);
-        }
-        else{
-
+        } else {
+            usernameRegister = (RozhaOneEditText) layout.findViewById(R.id.input_username_register);
+            emailRegister = (RozhaOneEditText) layout.findViewById(R.id.input_email_register);
+            passwordRegister = (RozhaOneEditText) layout.findViewById(R.id.input_password_register);
+            repeatPasswordRegister = (RozhaOneEditText) layout.findViewById(R.id.input_repeat_password_register);
         }
         return layout;
     }
@@ -67,6 +73,37 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
     private void startListActivity() {
         Intent intent = new Intent(mContext, FriendListActivity.class);
         mContext.startActivity(intent);
+    }
+
+    public void validateRegisterInputs() {
+        if (usernameRegister.getText().toString().equals("") || passwordRegister.getText().toString().equals("")
+                || repeatPasswordRegister.getText().toString().equals("")
+                || emailRegister.getText().toString().equals("")) {
+            if (!passwordRegister.getText().toString().equals(repeatPasswordRegister.getText().toString())) {
+                showToast(mContext.getResources().getString(R.string.invalid_passwords));
+            } else
+                showToast(mContext.getResources().getString(R.string.empty_imputs));
+        } else {
+            Call<User> call = apiService.register
+                    (new User(usernameRegister.getText().toString(), passwordRegister.getText().toString()));
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    if (response.code() == 200) {
+                        showToast(mContext.getResources().getString(R.string.properly_registered));
+                        usernameRegister.setText("");
+                        emailRegister.setText("");
+                        passwordRegister.setText("");
+                        repeatPasswordRegister.setText("");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    System.out.println("bzzzz");
+                }
+            });
+        }
     }
 
     public void validateLoginInputs() {
@@ -108,13 +145,5 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
-    }
-
-    public RozhaOneEditText getUsernameLogin() {
-        return usernameLogin;
-    }
-
-    public RozhaOneEditText getPasswordLogin() {
-        return passwordLogin;
     }
 }

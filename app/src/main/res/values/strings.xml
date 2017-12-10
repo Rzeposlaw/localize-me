@@ -10,4 +10,5 @@
     <string name="empty_imputs">Proszę wypełnić wszystkie pola</string>
     <string name="invalid_passwords">Hasła są różne!</string>
     <string name="wrong_input_data">Podano niepoprawne dane</string>
+    <string name="properly_registered">Poprawnie zarejestrowano</string>
 </resources>
