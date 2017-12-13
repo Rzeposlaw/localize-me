@@ -79,29 +79,30 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
         if (usernameRegister.getText().toString().equals("") || passwordRegister.getText().toString().equals("")
                 || repeatPasswordRegister.getText().toString().equals("")
                 || emailRegister.getText().toString().equals("")) {
+            showToast(mContext.getResources().getString(R.string.empty_imputs));
+        } else {
             if (!passwordRegister.getText().toString().equals(repeatPasswordRegister.getText().toString())) {
                 showToast(mContext.getResources().getString(R.string.invalid_passwords));
-            } else
-                showToast(mContext.getResources().getString(R.string.empty_imputs));
-        } else {
-            Call<User> call = apiService.register
-                    (new User(usernameRegister.getText().toString(), passwordRegister.getText().toString()));
-            call.enqueue(new Callback<User>() {
-                @Override
-                public void onResponse(Call<User> call, Response<User> response) {
-                    if (response.code() == 200) {
-                        showToast(mContext.getResources().getString(R.string.properly_registered));
-                        usernameRegister.setText("");
-                        emailRegister.setText("");
-                        passwordRegister.setText("");
-                        repeatPasswordRegister.setText("");
+            } else {
+                Call<User> call = apiService.register
+                        (new User(usernameRegister.getText().toString(), passwordRegister.getText().toString()));
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if (response.code() == 200) {
+                            showToast(mContext.getResources().getString(R.string.properly_registered));
+                            usernameRegister.setText("");
+                            emailRegister.setText("");
+                            passwordRegister.setText("");
+                            repeatPasswordRegister.setText("");
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<User> call, Throwable t) {
-                }
-            });
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                    }
+                });
+            }
         }
     }
 
