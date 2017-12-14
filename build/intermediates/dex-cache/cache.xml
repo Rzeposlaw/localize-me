@@ -21,12 +21,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/home/rzeposlaw/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.1/2a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0/gson-2.8.1.jar"
+        jar="/home/rzeposlaw/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.2"
-        sha1="02a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0">
-        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.8.1_338b3dbd9e895badfe334648cc98e833e26ac7e1/classes.dex" />
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="/home/rzeposlaw/AndroidStudioProjects/localize-me/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.7_1b8641e609131e1469ca48557dc8f3ff3f9b7aa6/classes.dex" />
     </item>
     <item
         is-multidex="true"

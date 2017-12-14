@@ -12,10 +12,14 @@ import android.widget.Toast;
 import com.example.rzeposlaw.localizeme.R;
 import com.example.rzeposlaw.localizeme.activity.FriendListActivity;
 import com.example.rzeposlaw.localizeme.data.ApiClient;
+import com.example.rzeposlaw.localizeme.data.Credentials;
 import com.example.rzeposlaw.localizeme.data.LocationAPI;
 import com.example.rzeposlaw.localizeme.data.User;
 import com.example.rzeposlaw.localizeme.view.RozhaOneEditText;
 import com.example.rzeposlaw.localizeme.view.RozhaOneTextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,11 +27,15 @@ import retrofit2.Response;
 
 public class LoginRegisterPagerAdapter extends PagerAdapter {
 
+    public static final String NAMES = "NAMES";
+
     private LocationAPI apiService =
             ApiClient.getClient().create(LocationAPI.class);
     private Context mContext;
     private int[] layouts = {R.layout.view_pager_login, R.layout.view_pager_register};
     private View toastView;
+    private List<String> names = new ArrayList<>();
+    public List<Credentials> users = new ArrayList<>();
 
     private RozhaOneEditText usernameLogin;
     private RozhaOneEditText passwordLogin;
@@ -56,6 +64,24 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
             passwordRegister = (RozhaOneEditText) layout.findViewById(R.id.input_password_register);
             repeatPasswordRegister = (RozhaOneEditText) layout.findViewById(R.id.input_repeat_password_register);
         }
+
+        Call<List<Credentials>> call = apiService.getAllUsers();
+        call.enqueue(new Callback<List<Credentials>>() {
+            @Override
+            public void onResponse(Call<List<Credentials>> call, Response<List<Credentials>> response) {
+                users = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<Credentials>> call, Throwable t) {
+            }
+
+        });
+        names = new ArrayList<>();
+        if(users.size() > 0)
+            for (Credentials user : users){
+                names.add(user.getUsername());
+            }
         return layout;
     }
 
@@ -72,6 +98,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
 
     private void startListActivity() {
         Intent intent = new Intent(mContext, FriendListActivity.class);
+        intent.putStringArrayListExtra(NAMES, (ArrayList<String>) names);
         mContext.startActivity(intent);
     }
 
@@ -91,10 +118,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
                     public void onResponse(Call<User> call, Response<User> response) {
                         if (response.code() == 200) {
                             showToast(mContext.getResources().getString(R.string.properly_registered));
-                            usernameRegister.setText("");
-                            emailRegister.setText("");
-                            passwordRegister.setText("");
-                            repeatPasswordRegister.setText("");
+                            clearRegisterEdittexts();
                         }
                     }
 
@@ -104,6 +128,13 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
                 });
             }
         }
+    }
+
+    private void clearRegisterEdittexts(){
+        usernameRegister.setText("");
+        emailRegister.setText("");
+        passwordRegister.setText("");
+        repeatPasswordRegister.setText("");
     }
 
     public void validateLoginInputs() {
@@ -117,10 +148,10 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
                 public void onResponse(Call<User> call, Response<User> response) {
                     if (response.code() == 200) {
                         startListActivity();
+                        clearLoginEdittexts();
                     } else {
                         showToast(mContext.getResources().getString(R.string.wrong_input_data));
-                        usernameLogin.setText("");
-                        passwordLogin.setText("");
+                        clearLoginEdittexts();
                     }
                 }
 
@@ -130,6 +161,11 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
                 }
             });
         }
+    }
+
+    private void clearLoginEdittexts(){
+        usernameLogin.setText("");
+        passwordLogin.setText("");
     }
 
     @Override
