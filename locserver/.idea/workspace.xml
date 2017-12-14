@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be87c8fd-528d-41f2-8fad-7194895d4257" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/data/Location.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/data/LocationCommand.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.idea/workspace.xml" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/data/LocationAPI.java" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/data/LocationAPI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$USER_HOME$/Desktop/locserver/target/" />
@@ -16,51 +19,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Desktop/locserver/src/main/java/com/example/locserver/controllers/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
+            <state relative-caret-position="476">
               <caret line="47" column="57" lean-forward="false" selection-start-line="47" selection-start-column="57" selection-end-line="47" selection-end-column="57" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Desktop/locserver/src/main/java/com/example/locserver/domain/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Credentials.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Desktop/locserver/src/main/java/com/example/locserver/commands/Credentials.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LocationController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LocationController.java" pinned="false" current-in-tab="true">
         <entry file="file://$USER_HOME$/Desktop/locserver/src/main/java/com/example/locserver/controllers/LocationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="25" column="31" lean-forward="true" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LocationCommand.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Desktop/locserver/src/main/java/com/example/locserver/commands/LocationCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="153">
+              <caret line="20" column="37" lean-forward="true" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -98,7 +71,7 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -330,12 +303,12 @@
       <workItem from="1513185679635" duration="1210000" />
       <workItem from="1513235998190" duration="2445000" />
       <workItem from="1513244502271" duration="2605000" />
-      <workItem from="1513264642680" duration="2711000" />
+      <workItem from="1513264642680" duration="3744000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20942000" />
+    <option name="totallyTimeSpent" value="21975000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -347,7 +320,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="10" y="20" width="1366" height="723" extended-state="6" />
+    <frame x="10" y="20" width="1366" height="723" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -624,14 +597,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/locserver/src/main/java/com/example/locserver/domain/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Desktop/locserver/src/main/java/com/example/locserver/commands/Credentials.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -640,26 +605,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/locserver/src/main/java/com/example/locserver/commands/LocationCommand.java">
+    <entry file="file://$USER_HOME$/Desktop/locserver/src/main/java/com/example/locserver/domain/Location.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="221">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/locserver/src/main/java/com/example/locserver/controllers/LocationController.java">
+    <entry file="file://$USER_HOME$/Desktop/locserver/src/main/java/com/example/locserver/commands/LocationCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="25" column="31" lean-forward="true" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
+        <state relative-caret-position="51">
+          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="5" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/locserver/src/main/java/com/example/locserver/domain/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Desktop/locserver/src/main/java/com/example/locserver/controllers/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
+        <state relative-caret-position="476">
           <caret line="47" column="57" lean-forward="false" selection-start-line="47" selection-start-column="57" selection-end-line="47" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/locserver/src/main/java/com/example/locserver/controllers/LocationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="20" column="37" lean-forward="true" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="37" />
           <folding />
         </state>
       </provider>
