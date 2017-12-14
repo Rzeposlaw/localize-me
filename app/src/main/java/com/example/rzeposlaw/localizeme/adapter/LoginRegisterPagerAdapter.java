@@ -3,6 +3,7 @@ package com.example.rzeposlaw.localizeme.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.example.rzeposlaw.localizeme.data.User;
 import com.example.rzeposlaw.localizeme.view.RozhaOneEditText;
 import com.example.rzeposlaw.localizeme.view.RozhaOneTextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -29,6 +31,8 @@ import retrofit2.Response;
 public class LoginRegisterPagerAdapter extends PagerAdapter {
 
     public static final String NAMES = "NAMES";
+    public static final String USERS = "USERS";
+    public static final String USERS_BUNDLE = "USERS_BUNDLE";
 
     private LocationAPI apiService =
             ApiClient.getClient().create(LocationAPI.class);
@@ -86,14 +90,19 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
         call.enqueue(new Callback<ArrayList<Credentials>>() {
             @Override
             public void onResponse(Call<ArrayList<Credentials>> call, Response<ArrayList<Credentials>> response) {
-                for (Credentials user : response.body()) {
+                ArrayList<Credentials> users = response.body();
+                for (Credentials user : users) {
                     if (!user.getUsername().equals(lastUsernameLogin))
                         names.add(user.getUsername());
                     else
                         loggedInUserId = user.getId();
                 }
+                //Bundle args = new Bundle();
+                //args.putSerializable(USERS,(Serializable) users);
+
                 Intent intent = new Intent(mContext, FriendListActivity.class);
                 intent.putStringArrayListExtra(NAMES, names);
+                //intent.putExtra(USERS_BUNDLE,args);
                 mContext.startActivity(intent);
             }
 
