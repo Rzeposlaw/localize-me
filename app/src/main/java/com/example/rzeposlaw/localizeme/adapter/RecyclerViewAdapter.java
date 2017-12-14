@@ -9,11 +9,12 @@ import android.widget.TextView;
 import com.example.rzeposlaw.localizeme.R;
 import com.example.rzeposlaw.localizeme.view.RozhaOneTextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<String> mDatasetUsernames;
+    private ArrayList<String> mDatasetUsernames;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public RozhaOneTextView username;
@@ -23,14 +24,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-    public RecyclerViewAdapter(List<String> mDatasetUsernames) {
+    public RecyclerViewAdapter(ArrayList<String> mDatasetUsernames) {
         this.mDatasetUsernames = mDatasetUsernames;
     }
 
     @Override
     public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
-        TextView v = (TextView) LayoutInflater.from(parent.getContext())
+        View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.row_friend, parent, false);
         return new ViewHolder(v);
     }

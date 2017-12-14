@@ -17,5 +17,5 @@ public interface LocationAPI {
     Call<User> login(@Body User user);
 
     @GET("/users")
-    Call<ArrayList<String>> getAllUsers();
+    Call<ArrayList<Credentials>> getAllUsers();
 }

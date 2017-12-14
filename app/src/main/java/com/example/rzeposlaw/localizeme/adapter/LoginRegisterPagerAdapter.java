@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.rzeposlaw.localizeme.R;
 import com.example.rzeposlaw.localizeme.activity.FriendListActivity;
 import com.example.rzeposlaw.localizeme.data.ApiClient;
+import com.example.rzeposlaw.localizeme.data.Credentials;
 import com.example.rzeposlaw.localizeme.data.LocationAPI;
 import com.example.rzeposlaw.localizeme.data.User;
 import com.example.rzeposlaw.localizeme.view.RozhaOneEditText;
@@ -77,22 +78,24 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
     }
 
     private void startListActivity() {
-        Call<ArrayList<String>> call = apiService.getAllUsers();
-        call.enqueue(new Callback<ArrayList<String>>() {
+        Call<ArrayList<Credentials>> call = apiService.getAllUsers();
+        call.enqueue(new Callback<ArrayList<Credentials>>() {
             @Override
-            public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
-                names = response.body();
+            public void onResponse(Call<ArrayList<Credentials>> call, Response<ArrayList<Credentials>> response) {
+                for(Credentials user : response.body()){
+                    if(!user.getUsername().equals(usernameLogin.getText().toString()))
+                        names.add(user.getUsername());
+                }
+                Intent intent = new Intent(mContext, FriendListActivity.class);
+                intent.putStringArrayListExtra(NAMES, names);
+                mContext.startActivity(intent);
             }
 
             @Override
-            public void onFailure(Call<ArrayList<String>> call, Throwable t) {
-                System.out.println("bzzz");
+            public void onFailure(Call<ArrayList<Credentials>> call, Throwable t) {
             }
 
         });
-        Intent intent = new Intent(mContext, FriendListActivity.class);
-        intent.putStringArrayListExtra(NAMES, (ArrayList<String>) names);
-        mContext.startActivity(intent);
     }
 
     public void validateRegisterInputs() {
