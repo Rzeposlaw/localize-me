@@ -4,6 +4,13 @@ public class LocationCommand {
 
     private int longitude;
     private int latitude;
+
+    public LocationCommand(int longitude, int latitude, long userID) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.userID = userID;
+    }
+
     private long userID;
 
 

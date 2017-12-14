@@ -11,4 +11,6 @@
     <string name="invalid_passwords">Hasła są różne!</string>
     <string name="wrong_input_data">Podano niepoprawne dane</string>
     <string name="properly_registered">Poprawnie zarejestrowano</string>
+    <string name="agree">Zgadzam się</string>
+    <string name="title_location_permission">Prośba o dostęp do lokalizacji telefonu</string>
 </resources>

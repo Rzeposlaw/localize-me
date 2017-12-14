@@ -2,6 +2,7 @@ package com.example.rzeposlaw.localizeme.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.support.v4.view.PagerAdapter;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.example.rzeposlaw.localizeme.activity.FriendListActivity;
 import com.example.rzeposlaw.localizeme.data.ApiClient;
 import com.example.rzeposlaw.localizeme.data.Credentials;
 import com.example.rzeposlaw.localizeme.data.LocationAPI;
+import com.example.rzeposlaw.localizeme.data.LocationCommand;
 import com.example.rzeposlaw.localizeme.data.User;
 import com.example.rzeposlaw.localizeme.view.RozhaOneEditText;
 import com.example.rzeposlaw.localizeme.view.RozhaOneTextView;
@@ -35,6 +37,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
     private View toastView;
     private String lastUsernameLogin;
     private ArrayList<String> names = new ArrayList<>();
+    private Long loggedInUserId;
 
     private RozhaOneEditText usernameLogin;
     private RozhaOneEditText passwordLogin;
@@ -86,6 +89,8 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
                 for (Credentials user : response.body()) {
                     if (!user.getUsername().equals(lastUsernameLogin))
                         names.add(user.getUsername());
+                    else
+                        loggedInUserId = user.getId();
                 }
                 Intent intent = new Intent(mContext, FriendListActivity.class);
                 intent.putStringArrayListExtra(NAMES, names);
@@ -144,7 +149,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
                     if (response.code() == 200) {
-                        lastUsernameLogin = usernameLogin.getText().toString();
+                        lastUsernameLogin = response.body().getUsername();
                         startListActivity();
                         clearLoginEdittexts();
                     } else {
@@ -164,6 +169,23 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
     private void clearLoginEdittexts() {
         usernameLogin.setText("");
         passwordLogin.setText("");
+    }
+
+    public void updateUserLocation(Location location){
+        LocationCommand locationCommand
+                = new LocationCommand((int) location.getLongitude(), (int) location.getLatitude(), loggedInUserId);
+        Call<com.example.rzeposlaw.localizeme.data.Location> call = apiService.updateUserLocation(locationCommand);
+        call.enqueue(new Callback<com.example.rzeposlaw.localizeme.data.Location>() {
+            @Override
+            public void onResponse(Call<com.example.rzeposlaw.localizeme.data.Location> call,
+                                   Response<com.example.rzeposlaw.localizeme.data.Location> response) {
+            }
+
+            @Override
+            public void onFailure(Call<com.example.rzeposlaw.localizeme.data.Location> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
