@@ -1,17 +1,54 @@
 package com.example.rzeposlaw.localizeme.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.location.Location;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.rzeposlaw.localizeme.R;
+import com.example.rzeposlaw.localizeme.activity.FriendListActivity;
+import com.example.rzeposlaw.localizeme.data.ApiClient;
+import com.example.rzeposlaw.localizeme.data.Credentials;
+import com.example.rzeposlaw.localizeme.data.LocationAPI;
+import com.example.rzeposlaw.localizeme.data.LocationCommand;
+import com.example.rzeposlaw.localizeme.data.User;
+import com.example.rzeposlaw.localizeme.view.RozhaOneEditText;
+import com.example.rzeposlaw.localizeme.view.RozhaOneTextView;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginRegisterPagerAdapter extends PagerAdapter {
 
+    public static final String NAMES = "NAMES";
+    public static final String USERS = "USERS";
+    public static final String USERS_BUNDLE = "USERS_BUNDLE";
+
+    private LocationAPI apiService =
+            ApiClient.getClient().create(LocationAPI.class);
     private Context mContext;
     private int[] layouts = {R.layout.view_pager_login, R.layout.view_pager_register};
+    private View toastView;
+    private String lastUsernameLogin;
+    private ArrayList<String> names = new ArrayList<>();
+    private Long loggedInUserId;
+
+    private RozhaOneEditText usernameLogin;
+    private RozhaOneEditText passwordLogin;
+    private RozhaOneEditText usernameRegister;
+    private RozhaOneEditText emailRegister;
+    private RozhaOneEditText passwordRegister;
+    private RozhaOneEditText repeatPasswordRegister;
 
     public LoginRegisterPagerAdapter(Context context) {
         mContext = context;
@@ -22,7 +59,142 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         ViewGroup layout = (ViewGroup) inflater.inflate(layouts[position], collection, false);
         collection.addView(layout);
+        toastView = inflater.inflate(R.layout.toast_layout,
+                (ViewGroup) layout.findViewById(R.id.toast_layout_root));
+        if (position == 0) {
+            usernameLogin = (RozhaOneEditText) layout.findViewById(R.id.input_username_login);
+            passwordLogin = (RozhaOneEditText) layout.findViewById(R.id.input_password_login);
+        } else {
+            usernameRegister = (RozhaOneEditText) layout.findViewById(R.id.input_username_register);
+            emailRegister = (RozhaOneEditText) layout.findViewById(R.id.input_email_register);
+            passwordRegister = (RozhaOneEditText) layout.findViewById(R.id.input_password_register);
+            repeatPasswordRegister = (RozhaOneEditText) layout.findViewById(R.id.input_repeat_password_register);
+        }
+
         return layout;
+    }
+
+    private void showToast(String textToast) {
+        RozhaOneTextView text = (RozhaOneTextView) toastView.findViewById(R.id.toast_text);
+        text.setText(textToast);
+
+        Toast toast = new Toast(mContext);
+        toast.setGravity(Gravity.TOP, 0, 0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(toastView);
+        toast.show();
+    }
+
+    private void startListActivity() {
+        Call<ArrayList<Credentials>> call = apiService.getAllUsers();
+        call.enqueue(new Callback<ArrayList<Credentials>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Credentials>> call, Response<ArrayList<Credentials>> response) {
+                ArrayList<Credentials> users = response.body();
+                for (Credentials user : users) {
+                    if (!user.getUsername().equals(lastUsernameLogin))
+                        names.add(user.getUsername());
+                    else
+                        loggedInUserId = user.getId();
+                }
+                //Bundle args = new Bundle();
+                //args.putSerializable(USERS,(Serializable) users);
+
+                Intent intent = new Intent(mContext, FriendListActivity.class);
+                intent.putStringArrayListExtra(NAMES, names);
+                //intent.putExtra(USERS_BUNDLE,args);
+                mContext.startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Credentials>> call, Throwable t) {
+            }
+
+        });
+    }
+
+    public void validateRegisterInputs() {
+        if (usernameRegister.getText().toString().equals("") || passwordRegister.getText().toString().equals("")
+                || repeatPasswordRegister.getText().toString().equals("")
+                || emailRegister.getText().toString().equals("")) {
+            showToast(mContext.getResources().getString(R.string.empty_imputs));
+        } else {
+            if (!passwordRegister.getText().toString().equals(repeatPasswordRegister.getText().toString())) {
+                showToast(mContext.getResources().getString(R.string.invalid_passwords));
+            } else {
+                Call<User> call = apiService.register
+                        (new User(usernameRegister.getText().toString(), passwordRegister.getText().toString()));
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if (response.code() == 200) {
+                            showToast(mContext.getResources().getString(R.string.properly_registered));
+                            clearRegisterEdittexts();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                    }
+                });
+            }
+        }
+    }
+
+    private void clearRegisterEdittexts() {
+        usernameRegister.setText("");
+        emailRegister.setText("");
+        passwordRegister.setText("");
+        repeatPasswordRegister.setText("");
+    }
+
+    public void validateLoginInputs() {
+        if (usernameLogin.getText().toString().equals("") || passwordLogin.getText().toString().equals("")) {
+            showToast(mContext.getResources().getString(R.string.empty_imputs));
+        } else {
+            Call<User> call = apiService.login
+                    (new User(usernameLogin.getText().toString(), passwordLogin.getText().toString()));
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    if (response.code() == 200) {
+                        lastUsernameLogin = response.body().getUsername();
+                        startListActivity();
+                        clearLoginEdittexts();
+                    } else {
+                        showToast(mContext.getResources().getString(R.string.wrong_input_data));
+                        clearLoginEdittexts();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+
+                }
+            });
+        }
+    }
+
+    private void clearLoginEdittexts() {
+        usernameLogin.setText("");
+        passwordLogin.setText("");
+    }
+
+    public void updateUserLocation(Location location){
+        LocationCommand locationCommand
+                = new LocationCommand((int) location.getLongitude(), (int) location.getLatitude(), loggedInUserId);
+        Call<com.example.rzeposlaw.localizeme.data.Location> call = apiService.updateUserLocation(locationCommand);
+        call.enqueue(new Callback<com.example.rzeposlaw.localizeme.data.Location>() {
+            @Override
+            public void onResponse(Call<com.example.rzeposlaw.localizeme.data.Location> call,
+                                   Response<com.example.rzeposlaw.localizeme.data.Location> response) {
+            }
+
+            @Override
+            public void onFailure(Call<com.example.rzeposlaw.localizeme.data.Location> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

@@ -33,6 +33,8 @@ dependencies {
     compile 'com.android.support:cardview-v7:26.0.+'
     compile 'com.android.support:recyclerview-v7:26.0.+'
     compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

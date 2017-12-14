@@ -1,36 +1,37 @@
 package com.example.rzeposlaw.localizeme.activity;
 
-import android.graphics.Typeface;
+import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.rzeposlaw.localizeme.adapter.LoginRegisterPagerAdapter;
 import com.example.rzeposlaw.localizeme.R;
 import com.example.rzeposlaw.localizeme.view.RozhaOneTextView;
 
-public class LoginRegisterActivity extends AppCompatActivity {
+public class LoginRegisterActivity extends AppCompatActivity implements LocationListener {
 
-    private static final String TAG = LoginRegisterActivity.class.getName();
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
     private RozhaOneTextView loginButton;
     private RozhaOneTextView registerButton;
     private ViewPager viewPager;
-    private EditText usernameLogin;
-    private EditText passwordLogin;
-    private EditText usernameRegister;
-    private EditText emailRegister;
-    private EditText passwordRegister;
-    private EditText repeatPasswordRegister;
     private boolean loginClicked;
     private boolean registerClicked;
+    private LoginRegisterPagerAdapter loginRegisterPagerAdapter;
+    private LocationManager locationManager;
+    private String provider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +41,9 @@ public class LoginRegisterActivity extends AppCompatActivity {
         loginClicked = true;
         registerClicked = false;
 
-        usernameLogin = (EditText) findViewById(R.id.input_username_login);
-        passwordLogin = (EditText) findViewById(R.id.input_password_login);
-        usernameRegister = (EditText) findViewById(R.id.input_username_register);
-        emailRegister = (EditText) findViewById(R.id.input_email_register);
-        passwordRegister = (EditText) findViewById(R.id.input_password_register);
-        repeatPasswordRegister = (EditText) findViewById(R.id.input_repeat_password_register);
-
         viewPager = (ViewPager) findViewById(R.id.pager);
-        viewPager.setAdapter(new LoginRegisterPagerAdapter(this));
+        loginRegisterPagerAdapter = new LoginRegisterPagerAdapter(this);
+        viewPager.setAdapter(loginRegisterPagerAdapter);
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -58,7 +53,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if(position == 0)
+                if (position == 0)
                     loginButton.performClick();
                 else
                     registerButton.performClick();
@@ -69,14 +64,13 @@ public class LoginRegisterActivity extends AppCompatActivity {
 
             }
         });
-
         loginButton = (RozhaOneTextView) findViewById(R.id.login);
         registerButton = (RozhaOneTextView) findViewById(R.id.register);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!loginClicked) {
+                if (!loginClicked) {
                     viewPager.setCurrentItem(0);
                     loginButton.setBackgroundDrawable(getResources()
                             .getDrawable(R.drawable.buttonshapeleftblue));
@@ -86,9 +80,8 @@ public class LoginRegisterActivity extends AppCompatActivity {
                     registerButton.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                     loginClicked = true;
                     registerClicked = false;
-                }
-                else {
-                    validateLoginInputs();
+                } else {
+                    loginRegisterPagerAdapter.validateLoginInputs();
                 }
             }
         });
@@ -96,7 +89,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!registerClicked) {
+                if (!registerClicked) {
                     viewPager.setCurrentItem(1);
                     loginButton.setBackgroundDrawable(getResources()
                             .getDrawable(R.drawable.buttonshapeleft));
@@ -106,35 +99,113 @@ public class LoginRegisterActivity extends AppCompatActivity {
                     loginButton.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                     registerClicked = true;
                     loginClicked = false;
-                }else{
-                    validateRegisterInputs();
+                } else {
+                    loginRegisterPagerAdapter.validateRegisterInputs();
                 }
             }
         });
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        provider = locationManager.getBestProvider(new Criteria(), false);
+
+        checkLocationPermission();
     }
 
-    private void showToast(){
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout,
-                (ViewGroup) findViewById(R.id.toast_layout_root));
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
-        RozhaOneTextView text = (RozhaOneTextView) layout.findViewById(R.id.toast_text);
-        text.setText(getResources().getString(R.string.empty_imputs));
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.TOP, 0, 0);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(layout);
-        toast.show();
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.title_location_permission)
+                        .setPositiveButton(R.string.agree, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ActivityCompat.requestPermissions(LoginRegisterActivity.this,
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                        MY_PERMISSIONS_REQUEST_LOCATION);
+                            }
+                        })
+                        .create()
+                        .show();
+
+
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    private boolean validateLoginInputs(){
-        showToast();
-        return false;
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+
+                        locationManager.requestLocationUpdates(provider, 400, 1, this);
+                    }
+
+                }
+                return;
+            }
+
+        }
     }
 
-    private boolean validateRegisterInputs(){
-        showToast();
-        return false;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            locationManager.requestLocationUpdates(provider, 400, 1, this);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            locationManager.removeUpdates(this);
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        loginRegisterPagerAdapter.updateUserLocation(location);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 }
