@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be87c8fd-528d-41f2-8fad-7194895d4257" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.idea/workspace.xml" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../app/app.iml" afterPath="$PROJECT_DIR$/../app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/activity/FriendListActivity.java" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/activity/FriendListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/adapter/LoginRegisterPagerAdapter.java" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/adapter/LoginRegisterPagerAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/adapter/RecyclerViewAdapter.java" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/adapter/RecyclerViewAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$USER_HOME$/Desktop/locserver/target/" />
@@ -337,12 +330,12 @@
       <workItem from="1513185679635" duration="1210000" />
       <workItem from="1513235998190" duration="2445000" />
       <workItem from="1513244502271" duration="2605000" />
-      <workItem from="1513264642680" duration="2226000" />
+      <workItem from="1513264642680" duration="2711000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20457000" />
+    <option name="totallyTimeSpent" value="20942000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">

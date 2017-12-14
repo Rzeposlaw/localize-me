@@ -3,6 +3,7 @@ package com.example.rzeposlaw.localizeme.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
     private Context mContext;
     private int[] layouts = {R.layout.view_pager_login, R.layout.view_pager_register};
     private View toastView;
+    private String lastUsernameLogin;
     private ArrayList<String> names = new ArrayList<>();
 
     private RozhaOneEditText usernameLogin;
@@ -83,8 +85,8 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
             @Override
             public void onResponse(Call<ArrayList<Credentials>> call, Response<ArrayList<Credentials>> response) {
                 for(Credentials user : response.body()){
-                    if(!user.getUsername().equals(usernameLogin.getText().toString()))
-                        names.add(user.getUsername());
+                    if(!user.getUsername().equals(lastUsernameLogin))
+                         names.add(user.getUsername());
                 }
                 Intent intent = new Intent(mContext, FriendListActivity.class);
                 intent.putStringArrayListExtra(NAMES, names);
@@ -143,6 +145,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
                     if (response.code() == 200) {
+                        lastUsernameLogin = usernameLogin.getText().toString();
                         startListActivity();
                         clearLoginEdittexts();
                     } else {
