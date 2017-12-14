@@ -1,5 +1,6 @@
 package com.example.rzeposlaw.localizeme.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -16,5 +17,5 @@ public interface LocationAPI {
     Call<User> login(@Body User user);
 
     @GET("/users")
-    Call<List<Credentials>> getAllUsers();
+    Call<ArrayList<String>> getAllUsers();
 }

@@ -12,14 +12,12 @@ import android.widget.Toast;
 import com.example.rzeposlaw.localizeme.R;
 import com.example.rzeposlaw.localizeme.activity.FriendListActivity;
 import com.example.rzeposlaw.localizeme.data.ApiClient;
-import com.example.rzeposlaw.localizeme.data.Credentials;
 import com.example.rzeposlaw.localizeme.data.LocationAPI;
 import com.example.rzeposlaw.localizeme.data.User;
 import com.example.rzeposlaw.localizeme.view.RozhaOneEditText;
 import com.example.rzeposlaw.localizeme.view.RozhaOneTextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,8 +32,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
     private Context mContext;
     private int[] layouts = {R.layout.view_pager_login, R.layout.view_pager_register};
     private View toastView;
-    private List<String> names = new ArrayList<>();
-    public List<Credentials> users = new ArrayList<>();
+    private ArrayList<String> names = new ArrayList<>();
 
     private RozhaOneEditText usernameLogin;
     private RozhaOneEditText passwordLogin;
@@ -65,23 +62,6 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
             repeatPasswordRegister = (RozhaOneEditText) layout.findViewById(R.id.input_repeat_password_register);
         }
 
-        Call<List<Credentials>> call = apiService.getAllUsers();
-        call.enqueue(new Callback<List<Credentials>>() {
-            @Override
-            public void onResponse(Call<List<Credentials>> call, Response<List<Credentials>> response) {
-                users = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<List<Credentials>> call, Throwable t) {
-            }
-
-        });
-        names = new ArrayList<>();
-        if(users.size() > 0)
-            for (Credentials user : users){
-                names.add(user.getUsername());
-            }
         return layout;
     }
 
@@ -97,6 +77,19 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
     }
 
     private void startListActivity() {
+        Call<ArrayList<String>> call = apiService.getAllUsers();
+        call.enqueue(new Callback<ArrayList<String>>() {
+            @Override
+            public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
+                names = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<String>> call, Throwable t) {
+                System.out.println("bzzz");
+            }
+
+        });
         Intent intent = new Intent(mContext, FriendListActivity.class);
         intent.putStringArrayListExtra(NAMES, (ArrayList<String>) names);
         mContext.startActivity(intent);
