@@ -3,7 +3,6 @@ package com.example.rzeposlaw.localizeme.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,9 +83,9 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
         call.enqueue(new Callback<ArrayList<Credentials>>() {
             @Override
             public void onResponse(Call<ArrayList<Credentials>> call, Response<ArrayList<Credentials>> response) {
-                for(Credentials user : response.body()){
-                    if(!user.getUsername().equals(lastUsernameLogin))
-                         names.add(user.getUsername());
+                for (Credentials user : response.body()) {
+                    if (!user.getUsername().equals(lastUsernameLogin))
+                        names.add(user.getUsername());
                 }
                 Intent intent = new Intent(mContext, FriendListActivity.class);
                 intent.putStringArrayListExtra(NAMES, names);
@@ -128,7 +127,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
         }
     }
 
-    private void clearRegisterEdittexts(){
+    private void clearRegisterEdittexts() {
         usernameRegister.setText("");
         emailRegister.setText("");
         passwordRegister.setText("");
@@ -162,7 +161,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
         }
     }
 
-    private void clearLoginEdittexts(){
+    private void clearLoginEdittexts() {
         usernameLogin.setText("");
         passwordLogin.setText("");
     }
