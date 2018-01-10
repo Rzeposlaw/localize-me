@@ -36,7 +36,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
     private int[] layouts = {R.layout.view_pager_login, R.layout.view_pager_register};
     private View toastView;
     private String lastUsernameLogin;
-    private Long loggedInUserId;
+    private Long loggedInUserId = 999L;
 
     private RozhaOneEditText usernameLogin;
     private RozhaOneEditText passwordLogin;
@@ -86,6 +86,14 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
             @Override
             public void onResponse(Call<ArrayList<Credentials>> call, Response<ArrayList<Credentials>> response) {
                 ArrayList<Credentials> users = response.body();
+                for(int i = 0 ; i < users.size() ; i++){
+                    if(users.get(i).getUsername().equals(lastUsernameLogin)){
+                        loggedInUserId = users.get(i).getId();
+                    }
+                    if(users.get(i).getId() == loggedInUserId){
+                        users.remove(i);
+                    }
+                }
 
                 Intent intent = new Intent(mContext, FriendListActivity.class);
                 intent.putParcelableArrayListExtra(USERS,users);
