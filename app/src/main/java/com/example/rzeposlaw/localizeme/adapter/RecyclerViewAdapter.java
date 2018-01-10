@@ -5,17 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.rzeposlaw.localizeme.R;
+import com.example.rzeposlaw.localizeme.data.Credentials;
 import com.example.rzeposlaw.localizeme.view.RozhaOneTextView;
 
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<String> mDatasetUsernames;
+    private ArrayList<Credentials> mDatasetUsers;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public RozhaOneTextView username;
@@ -28,8 +27,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-    public RecyclerViewAdapter(ArrayList<String> mDatasetUsernames) {
-        this.mDatasetUsernames = mDatasetUsernames;
+    public RecyclerViewAdapter(ArrayList<Credentials> mDatasetUsernames) {
+        this.mDatasetUsers = mDatasetUsernames;
     }
 
     @Override
@@ -42,7 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.username.setText(mDatasetUsernames.get(position));
+        holder.username.setText(mDatasetUsers.get(position).getUsername());
         holder.openMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return mDatasetUsernames.size();
+        return mDatasetUsers.size();
     }
 }
 
