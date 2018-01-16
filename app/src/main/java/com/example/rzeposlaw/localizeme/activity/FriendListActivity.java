@@ -19,6 +19,7 @@ public class FriendListActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Credentials> users = new ArrayList<>();
+    private Long loggedUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +28,14 @@ public class FriendListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         users = intent.getParcelableArrayListExtra(LoginRegisterPagerAdapter.USERS);
+        loggedUserId = intent.getLongExtra(LoginRegisterPagerAdapter.LOGGED_USER_ID, 999L);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new RecyclerViewAdapter(users);
+        mAdapter = new RecyclerViewAdapter(users, loggedUserId, this);
         mRecyclerView.setAdapter(mAdapter);
     }
 }

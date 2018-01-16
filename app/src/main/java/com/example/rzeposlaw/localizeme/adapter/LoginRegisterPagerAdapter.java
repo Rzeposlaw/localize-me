@@ -29,6 +29,7 @@ import retrofit2.Response;
 public class LoginRegisterPagerAdapter extends PagerAdapter {
 
     public static final String USERS = "USERS";
+    public static final String LOGGED_USER_ID = "LOGGED_USER_ID";
 
     private LocationAPI apiService =
             ApiClient.getClient().create(LocationAPI.class);
@@ -97,6 +98,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
 
                 Intent intent = new Intent(mContext, FriendListActivity.class);
                 intent.putParcelableArrayListExtra(USERS,users);
+                intent.putExtra(LOGGED_USER_ID, Long.valueOf(loggedInUserId));
                 mContext.startActivity(intent);
             }
 
