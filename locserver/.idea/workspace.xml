@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be87c8fd-528d-41f2-8fad-7194895d4257" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/utils/DataParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/utils/FetchUrl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/utils/ParserTask.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.idea/workspace.xml" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/activity/MapActivity.java" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/rzeposlaw/localizeme/activity/MapActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$USER_HOME$/Desktop/locserver/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -349,12 +345,12 @@
       <workItem from="1515016570291" duration="1080000" />
       <workItem from="1515526691500" duration="3185000" />
       <workItem from="1516137284164" duration="1375000" />
-      <workItem from="1516206727380" duration="5367000" />
+      <workItem from="1516206727380" duration="5964000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37073000" />
+    <option name="totallyTimeSpent" value="37670000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">

@@ -10,14 +10,20 @@ import com.example.rzeposlaw.localizeme.data.ApiClient;
 import com.example.rzeposlaw.localizeme.data.Location;
 import com.example.rzeposlaw.localizeme.data.LocationAPI;
 import com.example.rzeposlaw.localizeme.utils.FetchUrl;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +39,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private long friendsId;
     private LatLng loggedUserLocation;
     private LatLng friendsLocation;
+    private List<Marker> markers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,14 +97,15 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             MarkerOptions markerOptionsLogged = new MarkerOptions();
             markerOptionsLogged.position(loggedUserLocation);
             markerOptionsLogged.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
-            mMap.addMarker(markerOptionsLogged);
-
-            moveToCurrentLocation(loggedUserLocation);
+            markers.add(mMap.addMarker(markerOptionsLogged));
 
             MarkerOptions markerOptionsFriend = new MarkerOptions();
             markerOptionsFriend.position(friendsLocation);
             markerOptionsFriend.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
-            mMap.addMarker(markerOptionsFriend);
+            markers.add(mMap.addMarker(markerOptionsFriend));
+
+            moveToBounds();
+
             String url = getUrl(loggedUserLocation, friendsLocation);
             FetchUrl FetchUrl = new FetchUrl();
             FetchUrl.execute(url);
@@ -123,10 +131,14 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         return url;
     }
 
-    private void moveToCurrentLocation(LatLng currentLocation)
+    private void moveToBounds()
     {
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation,15));
-        mMap.animateCamera(CameraUpdateFactory.zoomIn());
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        for (Marker marker : markers) {
+            builder.include(marker.getPosition());
+        }
+        LatLngBounds bounds = builder.build();
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 0);
+        mMap.animateCamera(cu);
     }
 }
