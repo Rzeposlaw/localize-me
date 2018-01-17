@@ -109,14 +109,16 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
         });
     }
 
-    public void validateRegisterInputs() {
+    public boolean validateRegisterInputs() {
         if (usernameRegister.getText().toString().equals("") || passwordRegister.getText().toString().equals("")
                 || repeatPasswordRegister.getText().toString().equals("")
                 || emailRegister.getText().toString().equals("")) {
             showToast(mContext.getResources().getString(R.string.empty_imputs));
+            return false;
         } else {
             if (!passwordRegister.getText().toString().equals(repeatPasswordRegister.getText().toString())) {
                 showToast(mContext.getResources().getString(R.string.invalid_passwords));
+                return false;
             } else {
                 Call<User> call = apiService.register
                         (new User(usernameRegister.getText().toString(), passwordRegister.getText().toString()));
@@ -133,6 +135,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
                     public void onFailure(Call<User> call, Throwable t) {
                     }
                 });
+                return true;
             }
         }
     }

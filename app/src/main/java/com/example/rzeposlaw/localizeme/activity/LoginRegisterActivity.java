@@ -100,16 +100,21 @@ public class LoginRegisterActivity extends AppCompatActivity implements Location
                     registerClicked = true;
                     loginClicked = false;
                 } else {
-                    loginRegisterPagerAdapter.validateRegisterInputs();
+                    boolean registered = loginRegisterPagerAdapter.validateRegisterInputs();
+                    if(registered){
+                        checkLocationPermission();
+                    }
                 }
             }
         });
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        provider = locationManager.getBestProvider(new Criteria(), false);
+        Criteria criteria = new Criteria();
+        criteria.setPowerRequirement(Criteria.POWER_LOW);
+        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
 
-        checkLocationPermission();
+        provider = locationManager.getBestProvider(criteria, false);
     }
 
     public boolean checkLocationPermission() {
@@ -151,7 +156,7 @@ public class LoginRegisterActivity extends AppCompatActivity implements Location
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
-                        locationManager.requestLocationUpdates(provider, 400, 1, this);
+                        locationManager.requestLocationUpdates(provider, 360, 1, this);
                     }
                 }
                 return;
@@ -165,17 +170,7 @@ public class LoginRegisterActivity extends AppCompatActivity implements Location
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            locationManager.requestLocationUpdates(provider, 400, 1, this);
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            locationManager.removeUpdates(this);
+            locationManager.requestLocationUpdates(provider, 360, 1, this);
         }
     }
 

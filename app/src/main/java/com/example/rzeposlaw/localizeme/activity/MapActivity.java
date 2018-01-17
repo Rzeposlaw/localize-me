@@ -12,6 +12,7 @@ import com.example.rzeposlaw.localizeme.data.LocationAPI;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,6 +26,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private GoogleMap mMap;
     private long loggedUserId;
     private long friendsId;
+    private LatLng loggedUserLocation;
+    private LatLng friendsLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             @Override
             public void onResponse(Call<com.example.rzeposlaw.localizeme.data.Location> call,
                                    Response<Location> response) {
+                if(response.code() == 200){
+                    Location location = response.body();
+                    loggedUserLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                }
             }
 
             @Override
@@ -62,6 +69,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             @Override
             public void onResponse(Call<com.example.rzeposlaw.localizeme.data.Location> call,
                                    Response<Location> response) {
+                if(response.code() == 200){
+                    Location location = response.body();
+                    friendsLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                }
             }
 
             @Override
