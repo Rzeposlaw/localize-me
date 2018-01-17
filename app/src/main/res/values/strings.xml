@@ -13,4 +13,5 @@
     <string name="properly_registered">Poprawnie zarejestrowano</string>
     <string name="agree">Zgadzam się</string>
     <string name="title_location_permission">Prośba o dostęp do lokalizacji telefonu</string>
+    <string name="location_unknown">Lokalizacja nieznana, spróbuj ponownie</string>
 </resources>

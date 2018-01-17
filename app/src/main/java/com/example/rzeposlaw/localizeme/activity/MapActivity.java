@@ -3,6 +3,11 @@ package com.example.rzeposlaw.localizeme.activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.rzeposlaw.localizeme.R;
 import com.example.rzeposlaw.localizeme.adapter.RecyclerViewAdapter;
@@ -10,6 +15,7 @@ import com.example.rzeposlaw.localizeme.data.ApiClient;
 import com.example.rzeposlaw.localizeme.data.Location;
 import com.example.rzeposlaw.localizeme.data.LocationAPI;
 import com.example.rzeposlaw.localizeme.utils.FetchUrl;
+import com.example.rzeposlaw.localizeme.view.RozhaOneTextView;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,6 +45,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private long friendsId;
     private LatLng loggedUserLocation;
     private LatLng friendsLocation;
+    private View toastViewLayout;
     private List<Marker> markers = new ArrayList<>();
 
     @Override
@@ -49,6 +56,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         Intent intent = getIntent();
         loggedUserId = intent.getLongExtra(RecyclerViewAdapter.LOGGED_USER_ID, 999L);
         friendsId = intent.getLongExtra(RecyclerViewAdapter.FRIENDS_ID, 999L);
+
+        LayoutInflater inflater = getLayoutInflater();
+        toastViewLayout = inflater.inflate(R.layout.rounded_toast_layout,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -110,6 +121,20 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             FetchUrl FetchUrl = new FetchUrl();
             FetchUrl.execute(url);
         }
+        else{
+            showToast(getString(R.string.location_unknown));
+        }
+    }
+
+    private void showToast(String textToast) {
+        RozhaOneTextView text = (RozhaOneTextView) toastViewLayout.findViewById(R.id.toast_text);
+        text.setText(textToast);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(toastViewLayout);
+        toast.show();
     }
 
     public static void addPolyline(PolylineOptions polylineOptions){
