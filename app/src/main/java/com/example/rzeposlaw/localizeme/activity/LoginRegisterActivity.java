@@ -100,26 +100,29 @@ public class LoginRegisterActivity extends AppCompatActivity implements Location
                     registerClicked = true;
                     loginClicked = false;
                 } else {
-                    loginRegisterPagerAdapter.validateRegisterInputs();
+                    boolean registered = loginRegisterPagerAdapter.validateRegisterInputs();
+                    if(registered){
+                        checkLocationPermission();
+                    }
                 }
             }
         });
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        provider = locationManager.getBestProvider(new Criteria(), false);
+        Criteria criteria = new Criteria();
+        criteria.setPowerRequirement(Criteria.POWER_LOW);
+        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
 
-        checkLocationPermission();
+        provider = locationManager.getBestProvider(criteria, false);
     }
 
     public boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-
                 new AlertDialog.Builder(this)
                         .setTitle(R.string.title_location_permission)
                         .setPositiveButton(R.string.agree, new DialogInterface.OnClickListener() {
@@ -132,8 +135,6 @@ public class LoginRegisterActivity extends AppCompatActivity implements Location
                         })
                         .create()
                         .show();
-
-
             } else {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -152,18 +153,14 @@ public class LoginRegisterActivity extends AppCompatActivity implements Location
             case MY_PERMISSIONS_REQUEST_LOCATION: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
-
-                        locationManager.requestLocationUpdates(provider, 400, 1, this);
+                        locationManager.requestLocationUpdates(provider, 360, 1, this);
                     }
-
                 }
                 return;
             }
-
         }
     }
 
@@ -173,19 +170,7 @@ public class LoginRegisterActivity extends AppCompatActivity implements Location
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-
-            locationManager.requestLocationUpdates(provider, 400, 1, this);
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-
-            locationManager.removeUpdates(this);
+            locationManager.requestLocationUpdates(provider, 360, 1, this);
         }
     }
 

@@ -3,12 +3,13 @@ package com.example.rzeposlaw.localizeme.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.example.rzeposlaw.localizeme.R;
@@ -21,7 +22,6 @@ import com.example.rzeposlaw.localizeme.data.User;
 import com.example.rzeposlaw.localizeme.view.RozhaOneEditText;
 import com.example.rzeposlaw.localizeme.view.RozhaOneTextView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -30,9 +30,8 @@ import retrofit2.Response;
 
 public class LoginRegisterPagerAdapter extends PagerAdapter {
 
-    public static final String NAMES = "NAMES";
     public static final String USERS = "USERS";
-    public static final String USERS_BUNDLE = "USERS_BUNDLE";
+    public static final String LOGGED_USER_ID = "LOGGED_USER_ID";
 
     private LocationAPI apiService =
             ApiClient.getClient().create(LocationAPI.class);
@@ -40,15 +39,17 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
     private int[] layouts = {R.layout.view_pager_login, R.layout.view_pager_register};
     private View toastView;
     private String lastUsernameLogin;
-    private ArrayList<String> names = new ArrayList<>();
-    private Long loggedInUserId;
+    private Long loggedInUserId = 999L;
 
     private RozhaOneEditText usernameLogin;
     private RozhaOneEditText passwordLogin;
+
     private RozhaOneEditText usernameRegister;
     private RozhaOneEditText emailRegister;
     private RozhaOneEditText passwordRegister;
     private RozhaOneEditText repeatPasswordRegister;
+    private CheckBox womanCheckBoxRegister;
+    private CheckBox manCheckBoxRegister;
 
     public LoginRegisterPagerAdapter(Context context) {
         mContext = context;
@@ -69,6 +70,24 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
             emailRegister = (RozhaOneEditText) layout.findViewById(R.id.input_email_register);
             passwordRegister = (RozhaOneEditText) layout.findViewById(R.id.input_password_register);
             repeatPasswordRegister = (RozhaOneEditText) layout.findViewById(R.id.input_repeat_password_register);
+            womanCheckBoxRegister = (CheckBox) layout.findViewById(R.id.woman_checkbox);
+            manCheckBoxRegister = (CheckBox) layout.findViewById(R.id.man_checkbox);
+
+            womanCheckBoxRegister.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked)
+                        manCheckBoxRegister.setChecked(false);
+                }
+            });
+
+            manCheckBoxRegister.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked)
+                        womanCheckBoxRegister.setChecked(false);
+                }
+            });
         }
 
         return layout;
@@ -91,18 +110,18 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
             @Override
             public void onResponse(Call<ArrayList<Credentials>> call, Response<ArrayList<Credentials>> response) {
                 ArrayList<Credentials> users = response.body();
-                for (Credentials user : users) {
-                    if (!user.getUsername().equals(lastUsernameLogin))
-                        names.add(user.getUsername());
-                    else
-                        loggedInUserId = user.getId();
+                for(int i = 0 ; i < users.size() ; i++){
+                    if(users.get(i).getUsername().equals(lastUsernameLogin)){
+                        loggedInUserId = users.get(i).getId();
+                    }
+                    if(users.get(i).getId() == loggedInUserId){
+                        users.remove(i);
+                    }
                 }
-                //Bundle args = new Bundle();
-                //args.putSerializable(USERS,(Serializable) users);
 
                 Intent intent = new Intent(mContext, FriendListActivity.class);
-                intent.putStringArrayListExtra(NAMES, names);
-                //intent.putExtra(USERS_BUNDLE,args);
+                intent.putParcelableArrayListExtra(USERS,users);
+                intent.putExtra(LOGGED_USER_ID, Long.valueOf(loggedInUserId));
                 mContext.startActivity(intent);
             }
 
@@ -113,17 +132,27 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
         });
     }
 
-    public void validateRegisterInputs() {
+    public boolean validateRegisterInputs() {
         if (usernameRegister.getText().toString().equals("") || passwordRegister.getText().toString().equals("")
                 || repeatPasswordRegister.getText().toString().equals("")
                 || emailRegister.getText().toString().equals("")) {
             showToast(mContext.getResources().getString(R.string.empty_imputs));
+            return false;
         } else {
             if (!passwordRegister.getText().toString().equals(repeatPasswordRegister.getText().toString())) {
                 showToast(mContext.getResources().getString(R.string.invalid_passwords));
+                return false;
             } else {
+                String sex = "";
+                if(womanCheckBoxRegister.isChecked()){
+                    sex = "W";
+                }
+                else{
+                    sex = "M";
+                }
                 Call<User> call = apiService.register
-                        (new User(usernameRegister.getText().toString(), passwordRegister.getText().toString()));
+                        (new User(usernameRegister.getText().toString(), passwordRegister.getText().toString(),
+                                emailRegister.getText().toString(), sex));
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
@@ -137,6 +166,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
                     public void onFailure(Call<User> call, Throwable t) {
                     }
                 });
+                return true;
             }
         }
     }
@@ -153,7 +183,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
             showToast(mContext.getResources().getString(R.string.empty_imputs));
         } else {
             Call<User> call = apiService.login
-                    (new User(usernameLogin.getText().toString(), passwordLogin.getText().toString()));
+                    (new User(usernameLogin.getText().toString(), passwordLogin.getText().toString(), null, null));
             call.enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {

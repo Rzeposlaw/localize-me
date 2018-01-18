@@ -14,7 +14,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.splash);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -23,7 +22,6 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
 }
