@@ -8,6 +8,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.example.rzeposlaw.localizeme.R;
@@ -41,10 +43,13 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
 
     private RozhaOneEditText usernameLogin;
     private RozhaOneEditText passwordLogin;
+
     private RozhaOneEditText usernameRegister;
     private RozhaOneEditText emailRegister;
     private RozhaOneEditText passwordRegister;
     private RozhaOneEditText repeatPasswordRegister;
+    private CheckBox womanCheckBoxRegister;
+    private CheckBox manCheckBoxRegister;
 
     public LoginRegisterPagerAdapter(Context context) {
         mContext = context;
@@ -65,6 +70,24 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
             emailRegister = (RozhaOneEditText) layout.findViewById(R.id.input_email_register);
             passwordRegister = (RozhaOneEditText) layout.findViewById(R.id.input_password_register);
             repeatPasswordRegister = (RozhaOneEditText) layout.findViewById(R.id.input_repeat_password_register);
+            womanCheckBoxRegister = (CheckBox) layout.findViewById(R.id.woman_checkbox);
+            manCheckBoxRegister = (CheckBox) layout.findViewById(R.id.man_checkbox);
+
+            womanCheckBoxRegister.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked)
+                        manCheckBoxRegister.setChecked(false);
+                }
+            });
+
+            manCheckBoxRegister.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked)
+                        womanCheckBoxRegister.setChecked(false);
+                }
+            });
         }
 
         return layout;
@@ -120,9 +143,16 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
                 showToast(mContext.getResources().getString(R.string.invalid_passwords));
                 return false;
             } else {
+                String sex = "";
+                if(womanCheckBoxRegister.isChecked()){
+                    sex = "W";
+                }
+                else{
+                    sex = "M";
+                }
                 Call<User> call = apiService.register
                         (new User(usernameRegister.getText().toString(), passwordRegister.getText().toString(),
-                                emailRegister.getText().toString()));
+                                emailRegister.getText().toString(), sex));
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
@@ -153,7 +183,7 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
             showToast(mContext.getResources().getString(R.string.empty_imputs));
         } else {
             Call<User> call = apiService.login
-                    (new User(usernameLogin.getText().toString(), passwordLogin.getText().toString()));
+                    (new User(usernameLogin.getText().toString(), passwordLogin.getText().toString(), null, null));
             call.enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
