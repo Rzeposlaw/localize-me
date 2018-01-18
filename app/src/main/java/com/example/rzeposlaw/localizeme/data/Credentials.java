@@ -11,6 +11,14 @@ public class Credentials implements Parcelable{
     private String email;
     private String sex;
 
+    public Credentials(Parcel in) {
+        this.id = in.readLong();
+        this.username = in.readString();
+        this.password = in.readString();
+        this.email = in.readString();
+        this.sex = in.readString();
+    }
+
     public String getEmail() {
         return email;
     }
@@ -25,14 +33,6 @@ public class Credentials implements Parcelable{
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public Credentials(Parcel in) {
-        this.id = in.readLong();
-        this.username = in.readString();
-        this.password = in.readString();
-        this.email = in.readString();
-        this.sex = in.readString();
     }
 
     public long getId() {

@@ -53,6 +53,43 @@
             android:padding="20dp"
             android:textColorHint="@color/colorAccent" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:weightSum="2"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/woman_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"/>
+
+            <com.example.rzeposlaw.localizeme.view.RozhaOneTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/woman"
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:textColor="@android:color/black"/>
+
+            <CheckBox
+                android:id="@+id/man_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"/>
+
+            <com.example.rzeposlaw.localizeme.view.RozhaOneTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/man"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

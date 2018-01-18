@@ -121,7 +121,8 @@ public class LoginRegisterPagerAdapter extends PagerAdapter {
                 return false;
             } else {
                 Call<User> call = apiService.register
-                        (new User(usernameRegister.getText().toString(), passwordRegister.getText().toString()));
+                        (new User(usernameRegister.getText().toString(), passwordRegister.getText().toString(),
+                                emailRegister.getText().toString()));
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
