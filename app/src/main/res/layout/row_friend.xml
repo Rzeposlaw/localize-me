@@ -22,11 +22,11 @@
             android:weightSum="1">
 
             <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
+                android:id="@+id/user_avatar"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:src="@drawable/man_avatar"
                 app:siShape="@drawable/image_mask"
                 app:siSquare="true" />
 
@@ -47,6 +47,16 @@
                     android:padding="4dp"
                     android:textColor="@color/colorPrimary"
                     tools:text="Here user's name" />
+
+                <com.example.rzeposlaw.localizeme.view.RozhaOneTextView
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    tools:text="Here user's email" />
 
             </LinearLayout>
 
