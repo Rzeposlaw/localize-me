@@ -1,8 +1,16 @@
 package com.example.rzeposlaw.localizeme.activity;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +43,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.rzeposlaw.localizeme.activity.LoginRegisterActivity.MY_PERMISSIONS_REQUEST_LOCATION;
+
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private LocationAPI apiService =
@@ -47,6 +57,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private LatLng friendsLocation;
     private View toastViewLayout;
     private List<Marker> markers = new ArrayList<>();
+    private LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,66 +75,102 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        if(checkLocationPermission()) {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 360, 1, new LocationListener() {
+
+                @Override
+                public void onLocationChanged(android.location.Location location) {
+                    loggedUserLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                    Call<Location> callForFriend = apiService.getUserLastLocation(Long.toString(friendsId));
+                    callForFriend.enqueue(new Callback<Location>() {
+                        @Override
+                        public void onResponse(Call<com.example.rzeposlaw.localizeme.data.Location> call,
+                                               Response<Location> response) {
+                            if (response.code() == 200) {
+                                Location location = response.body();
+                                friendsLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                                if (loggedUserLocation != null) {
+                                    MarkerOptions markerOptionsLogged = new MarkerOptions();
+                                    markerOptionsLogged.position(loggedUserLocation);
+                                    markerOptionsLogged.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
+                                    markers.add(mMap.addMarker(markerOptionsLogged));
+
+                                    MarkerOptions markerOptionsFriend = new MarkerOptions();
+                                    markerOptionsFriend.position(friendsLocation);
+                                    markerOptionsFriend.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
+                                    markers.add(mMap.addMarker(markerOptionsFriend));
+
+                                    moveToBounds();
+
+                                    String url = getUrl(loggedUserLocation, friendsLocation);
+                                    FetchUrl FetchUrl = new FetchUrl();
+                                    FetchUrl.execute(url);
+                                } else {
+                                    showToast(getString(R.string.location_unknown));
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<com.example.rzeposlaw.localizeme.data.Location> call, Throwable t) {
+
+                        }
+                    });
+                }
+
+                @Override
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                }
+
+                @Override
+                public void onProviderEnabled(String provider) {
+
+                }
+
+                @Override
+                public void onProviderDisabled(String provider) {
+
+                }
+            });
+        }
+    }
+
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.title_location_permission)
+                        .setPositiveButton(R.string.agree, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ActivityCompat.requestPermissions(MapActivity.this,
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                        MY_PERMISSIONS_REQUEST_LOCATION);
+                            }
+                        })
+                        .create()
+                        .show();
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        Call<Location> callUserLocation = apiService.getUserLastLocation(Long.toString(loggedUserId));
-        callUserLocation.enqueue(new Callback<Location>() {
-            @Override
-            public void onResponse(Call<com.example.rzeposlaw.localizeme.data.Location> call,
-                                   Response<Location> response) {
-                if(response.code() == 200){
-                    Location location = response.body();
-                    loggedUserLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<com.example.rzeposlaw.localizeme.data.Location> call, Throwable t) {
-
-            }
-        });
-
-        Call<Location> callForFriend = apiService.getUserLastLocation(Long.toString(friendsId));
-        callForFriend.enqueue(new Callback<Location>() {
-            @Override
-            public void onResponse(Call<com.example.rzeposlaw.localizeme.data.Location> call,
-                                   Response<Location> response) {
-                if(response.code() == 200){
-                    Location location = response.body();
-                    friendsLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<com.example.rzeposlaw.localizeme.data.Location> call, Throwable t) {
-
-            }
-        });
-
-        if(loggedUserLocation != null && friendsLocation != null) {
-            MarkerOptions markerOptionsLogged = new MarkerOptions();
-            markerOptionsLogged.position(loggedUserLocation);
-            markerOptionsLogged.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
-            markers.add(mMap.addMarker(markerOptionsLogged));
-
-            MarkerOptions markerOptionsFriend = new MarkerOptions();
-            markerOptionsFriend.position(friendsLocation);
-            markerOptionsFriend.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
-            markers.add(mMap.addMarker(markerOptionsFriend));
-
-            moveToBounds();
-
-            String url = getUrl(loggedUserLocation, friendsLocation);
-            FetchUrl FetchUrl = new FetchUrl();
-            FetchUrl.execute(url);
-        }
-        else{
-            showToast(getString(R.string.location_unknown));
-        }
     }
 
     private void showToast(String textToast) {
@@ -137,7 +184,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         toast.show();
     }
 
-    public static void addPolyline(PolylineOptions polylineOptions){
+    public static void addPolyline(PolylineOptions polylineOptions) {
         mMap.addPolyline(polylineOptions);
     }
 
@@ -156,8 +203,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         return url;
     }
 
-    private void moveToBounds()
-    {
+    private void moveToBounds() {
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         for (Marker marker : markers) {
             builder.include(marker.getPosition());

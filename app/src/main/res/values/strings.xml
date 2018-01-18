@@ -7,13 +7,13 @@
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="title_activity_map">Map</string>
-    <string name="empty_imputs">Proszę wypełnić wszystkie pola</string>
-    <string name="invalid_passwords">Hasła są różne!</string>
-    <string name="wrong_input_data">Podano niepoprawne dane</string>
-    <string name="properly_registered">Poprawnie zarejestrowano</string>
+    <string name="empty_imputs">Please fill in all fields</string>
+    <string name="invalid_passwords">Passwords are different!</string>
+    <string name="wrong_input_data">Wrong data</string>
+    <string name="properly_registered">Registered correctly</string>
     <string name="agree">Zgadzam się</string>
-    <string name="title_location_permission">Prośba o dostęp do lokalizacji telefonu</string>
-    <string name="location_unknown">Lokalizacja nieznana, spróbuj ponownie</string>
-    <string name="woman">Kobieta</string>
-    <string name="man">Mężczyzna</string>
+    <string name="title_location_permission">A request to access your location</string>
+    <string name="location_unknown">Location unknown, please try again</string>
+    <string name="woman">Woman</string>
+    <string name="man">Man</string>
 </resources>
