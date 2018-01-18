@@ -8,11 +8,31 @@ public class Credentials implements Parcelable{
     private long id;
     private String username;
     private String password;
+    private String email;
+    private String sex;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     public Credentials(Parcel in) {
         this.id = in.readLong();
         this.username = in.readString();
         this.password = in.readString();
+        this.email = in.readString();
+        this.sex = in.readString();
     }
 
     public long getId() {
@@ -49,6 +69,8 @@ public class Credentials implements Parcelable{
         dest.writeLong(id);
         dest.writeString(username);
         dest.writeString(password);
+        dest.writeString(email);
+        dest.writeString(sex);
     }
 
     public static final Parcelable.Creator<Credentials> CREATOR = new Parcelable.Creator<Credentials>() {
